@@ -1,0 +1,127 @@
+//
+//  HomeCollectionViewCell.swift
+//  ECommerceDemo
+//
+//  Created by Ashiq on 12/5/20.
+//  Copyright © 2020 LastBlade. All rights reserved.
+//
+
+import UIKit
+
+class HomeCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var sliderCollectionView: UICollectionView!
+    
+    @IBOutlet weak var featuredProductCollectionView: UICollectionView!
+    
+    @IBOutlet weak var newArrivalCollectionView: UICollectionView!
+    
+    @IBOutlet weak var newArrivalCollectionViewHeightConstraint: NSLayoutConstraint!
+    
+    private  var newArrivalCollectionViewCellHeight  = 150.0
+    private  var  newArrivalTotalItem = 30
+    @IBOutlet weak var pageController: UIPageControl!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        sliderCollectionView.delegate = self
+        sliderCollectionView.dataSource = self
+        
+        featuredProductCollectionView.delegate = self
+        featuredProductCollectionView.dataSource = self
+        
+        newArrivalCollectionView.delegate = self
+        newArrivalCollectionView.dataSource = self
+        
+        
+        setNewArrivalCollectionViewHeight()
+    }
+    
+    func setNewArrivalCollectionViewHeight() {
+        let flowLayout = newArrivalCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
+        let row = Double(newArrivalTotalItem / 2)
+        let spaceBetweenLine = flowLayout.minimumLineSpacing * CGFloat(row - 1)
+        
+        newArrivalCollectionViewHeightConstraint.constant = CGFloat(newArrivalCollectionViewCellHeight * row + Double(spaceBetweenLine + sectionInset) )
+    }
+}
+
+
+extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+   
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        switch collectionView.tag {
+        case 1:
+            return 3
+        case 2:
+            return 3
+        case 3:
+            return newArrivalTotalItem
+        default:
+            return 0
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+        var cell : UICollectionViewCell
+      
+        switch collectionView.tag {
+       
+        case 1:
+             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
+            return cell
+        
+        case 2:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedProductCell", for: indexPath) as! FeaturedProductCell
+            return cell
+        
+        case 3: cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewArrivalCell", for: indexPath) as! NewArrivalCell
+            return cell
+        
+        default:
+            
+            return UICollectionViewCell()
+        }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+       
+        switch collectionView.tag {
+        
+        case 1:
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+
+        case 3:
+            
+              // Change this column number to get your desired column
+                  let column = 2
+                  let width = collectionView.bounds.width
+                  let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+                  let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+                  let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
+                  // Round down the fraction number using floor method
+                  let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
+                  
+                  
+                  return CGSize(width: adjustedWidth, height: CGFloat(newArrivalCollectionViewCellHeight))
+            
+        default:
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        }
+       
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+       
+        if collectionView.tag == 1 {
+            pageController.currentPage = indexPath.item
+        }
+    }
+}
