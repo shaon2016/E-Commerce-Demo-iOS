@@ -17,9 +17,10 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var newArrivalCollectionViewHeightConstraint: NSLayoutConstraint!
     
-    private  var newArrivalCollectionViewCellHeight  = 150.0
-    private  var  newArrivalTotalItem = 30
+    private  var newArrivalCollectionViewCellHeight  = 190.0
     @IBOutlet weak var pageController: UIPageControl!
+    
+    private var model : Model?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,13 +35,26 @@ class HomeCollectionViewCell: UICollectionViewCell {
         newArrivalCollectionView.dataSource = self
         
         
+        
+    }
+    
+    func updateView(withModel modelData : Model) {
+        model = modelData
         setNewArrivalCollectionViewHeight()
     }
     
     func setNewArrivalCollectionViewHeight() {
         let flowLayout = newArrivalCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
-        let row = Double(newArrivalTotalItem / 2)
+        let count = model?.products.count ?? 0
+        var row = 0.0
+       
+        if count % 2 == 0 {
+            row = Double(count / 2 )
+        }
+        else {
+            row = Double(count / 2 ) + 1
+        }
         let spaceBetweenLine = flowLayout.minimumLineSpacing * CGFloat(row - 1)
         
         newArrivalCollectionViewHeightConstraint.constant = CGFloat(newArrivalCollectionViewCellHeight * row + Double(spaceBetweenLine + sectionInset) )
@@ -60,7 +74,7 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
         case 2:
             return 3
         case 3:
-            return newArrivalTotalItem
+            return model?.products.count ?? 0
         default:
             return 0
         }
@@ -69,19 +83,23 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        var cell : UICollectionViewCell
+     
       
         switch collectionView.tag {
        
         case 1:
-             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
+            let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
             return cell
         
         case 2:
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedProductCell", for: indexPath) as! FeaturedProductCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedProductCell", for: indexPath) as! FeaturedProductCell
             return cell
         
-        case 3: cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewArrivalCell", for: indexPath) as! NewArrivalCell
+        case 3:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewArrivalCell", for: indexPath) as! NewArrivalCell
+        
+            cell.update(product:  model?.products[indexPath.row])
+            
             return cell
         
         default:

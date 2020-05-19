@@ -31,6 +31,8 @@ UICollectionViewDelegateFlowLayout {
        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as! HomeCollectionViewCell
         
+          cell.updateView(withModel : Model())
+        
             return cell
        }
        
