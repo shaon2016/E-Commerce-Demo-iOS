@@ -11,6 +11,7 @@ import UIKit
 class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     
+    @IBOutlet weak var sliderImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var featuredProductCollectionView: UICollectionView!
     
     @IBOutlet weak var newArrivalCollectionView: UICollectionView!
@@ -70,9 +71,9 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
         
         switch collectionView.tag {
         case 1:
-            return 3
+            return model?.products.count ?? 0
         case 2:
-            return 3
+            return model?.products.count ?? 0
         case 3:
             return model?.products.count ?? 0
         default:
@@ -89,10 +90,21 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
        
         case 1:
             let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
+           
+            if let product = model?.products[indexPath.row] {
+                    cell.updateView(product:  product)
+            }
+            
             return cell
         
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedProductCell", for: indexPath) as! FeaturedProductCell
+          
+            if let product = model?.products[indexPath.row] {
+                cell.updateView(product:  product)
+            }
+            
+            
             return cell
         
         case 3:
@@ -112,10 +124,15 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
        
         switch collectionView.tag {
-        
-        case 1:
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-
+     
+        case 1 :
+            
+           return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height)
+     
+        case 2 :
+            
+            return CGSize(width: 225, height: 145)
+            
         case 3:
             
               // Change this column number to get your desired column
@@ -131,7 +148,7 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
                   return CGSize(width: adjustedWidth, height: CGFloat(newArrivalCollectionViewCellHeight))
             
         default:
-            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height)
         }
        
     }
