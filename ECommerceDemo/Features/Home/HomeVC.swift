@@ -11,11 +11,11 @@ import UIKit
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
-
+    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     lazy var homeVM = HomeVM()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,25 +23,35 @@ UICollectionViewDelegateFlowLayout {
         mainCollectionView.delegate = self
         
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           return 1
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as! HomeCollectionViewCell
         
-          cell.updateView(withModel : Model())
+        cell.updateView(withModel : Model())
         
-            return cell
-       }
-       
-
+        cell.goToProductDetailsPage = { [weak self] product in
+          
+            let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+            let productDetailsVC = storyboard.instantiateViewController(identifier: "ProductDetailsVC") as! ProductDetailsVC
+            
+            productDetailsVC.setProduct(product: product)
+            
+            self?.present(productDetailsVC, animated: true, completion: nil)
+        }
+        
+        return cell
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = view.frame.width
         let height = collectionView.bounds.height
-     
+        
         return CGSize(width: width, height: height)
     }
     

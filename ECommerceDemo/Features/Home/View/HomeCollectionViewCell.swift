@@ -23,6 +23,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private var model : Model?
     
+    var goToProductDetailsPage : ((Product) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -151,6 +153,16 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
             return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height)
         }
        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+        if let product = model?.products[indexPath.row] {
+        
+            goToProductDetailsPage?(product)
+        }
+       
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
