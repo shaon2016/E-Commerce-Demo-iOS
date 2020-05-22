@@ -19,9 +19,27 @@ UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         
+        setNav()
+        
+    }
+    
+    func setNav()  {
+        navigationItem.title = "Home"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cart"), landscapeImagePhone: .none, style: .plain, target: self, action: #selector(cartBtnTapped))
+    }
+    
+    @objc func cartBtnTapped() {
+         let storyboard = UIStoryboard(name: "Cart", bundle: nil)
+         let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
+                   
+        navigationController?.pushViewController(cartVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -34,13 +52,13 @@ UICollectionViewDelegateFlowLayout {
         cell.updateView(withModel : Model())
         
         cell.goToProductDetailsPage = { [weak self] product in
-          
+            
             let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
             let productDetailsVC = storyboard.instantiateViewController(identifier: "ProductDetailsVC") as! ProductDetailsVC
             
             productDetailsVC.setProduct(product: product)
-            
-            self?.present(productDetailsVC, animated: true, completion: nil)
+            self?.navigationController?.pushViewController(productDetailsVC, animated: true)
+            //self?.present(productDetailsVC, animated: true, completion: nil)
         }
         
         return cell

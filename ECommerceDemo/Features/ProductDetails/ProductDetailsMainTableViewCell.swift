@@ -22,6 +22,10 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
     
      lazy var model = Model()
     
+    private  var relatedProductCollectionViewCellHeight  = 216.0
+    @IBOutlet weak var relatedProductCollectionViewHeightConstraint: NSLayoutConstraint!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        
@@ -36,7 +40,12 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
         priceLabel.text = "\(product.price) BDT"
         reviewStackView.setStarsRating(rating: product.rating)
         reviewLabel.text = "\(product.rating)/5"
+        
+        setrelatedProductCollectionViewHeight()
     }
+    
+
+
   
 }
 
@@ -45,7 +54,7 @@ extension ProductDetailsMainTableViewCell : UICollectionViewDataSource, UICollec
 UICollectionViewDelegateFlowLayout {
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return model.products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,5 +67,35 @@ UICollectionViewDelegateFlowLayout {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // Change this column number to get your desired column
+        let column = 2
+        let width = collectionView.bounds.width
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
+        // Round down the fraction number using floor method
+        let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
+        
+        
+        return CGSize(width: adjustedWidth, height: CGFloat(relatedProductCollectionViewCellHeight))
+    }
     
+    func setrelatedProductCollectionViewHeight() {
+        let flowLayout = relatedProductCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
+        let count = model.products.count
+        var row = 0.0
+       
+        if count % 2 == 0 {
+            row = Double(count / 2 )
+        }
+        else {
+            row = Double(count / 2 ) + 1
+        }
+        let spaceBetweenLine = flowLayout.minimumLineSpacing * CGFloat(row - 1)
+        
+        relatedProductCollectionViewHeightConstraint.constant = CGFloat(relatedProductCollectionViewCellHeight * row + Double(spaceBetweenLine + sectionInset) )
+    }
 }

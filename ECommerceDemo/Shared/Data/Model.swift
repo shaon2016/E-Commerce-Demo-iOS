@@ -11,6 +11,7 @@ import UIKit
 
 struct Model {
     lazy var products = [Product]()
+    lazy var carts = [Cart]()
     
     init() {
         let product1 = Product(title: "Color Pencils", price: 150.0, image: UIImage(named: "pencils")!, rating: 4)
@@ -24,6 +25,12 @@ struct Model {
         products.append(product3)
         products.append(product4)
         products.append(product5)
+        
+        let cart1 = Cart(product: product1, quantity: 2)
+        let cart2 = Cart(product: product2, quantity: 1)
+        
+        carts.append(cart1)
+        carts.append(cart2)
     }
 }
 
@@ -34,4 +41,9 @@ struct Product {
     var image : UIImage
     var rating : Int
     
+}
+
+struct Cart {
+    let product : Product
+    var quantity : Int
 }
