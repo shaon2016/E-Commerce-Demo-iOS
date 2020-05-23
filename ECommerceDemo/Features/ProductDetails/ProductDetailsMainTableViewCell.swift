@@ -41,7 +41,7 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
         reviewStackView.setStarsRating(rating: product.rating)
         reviewLabel.text = "\(product.rating)/5"
         
-        setrelatedProductCollectionViewHeight()
+        setRelatedProductCollectionViewHeight()
     }
     
 
@@ -82,7 +82,7 @@ UICollectionViewDelegateFlowLayout {
         return CGSize(width: adjustedWidth, height: CGFloat(relatedProductCollectionViewCellHeight))
     }
     
-    func setrelatedProductCollectionViewHeight() {
+    func setRelatedProductCollectionViewHeight() {
         let flowLayout = relatedProductCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
         let count = model.products.count
