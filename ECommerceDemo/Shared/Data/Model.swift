@@ -67,12 +67,6 @@ struct Model {
         let type7 = ProductType(title: "Neckles")
         let type8 = ProductType(title: "Rings")
         let type9 = ProductType(title: "Women's Gorgeous Cloth")
-        let type10 = ProductType(title: "Women's Gorgeous Cloth")
-        let type11 = ProductType(title: "Women's Gorgeous Cloth")
-        let type12 = ProductType(title: "Women's Gorgeous Cloth")
-        let type13 = ProductType(title: "Women's Gorgeous Cloth")
-        let type14 = ProductType(title: "Women's Gorgeous Cloth")
-        let type15 = ProductType(title: "Women's Gorgeous Cloth")
         
         var types2 = [ProductType]()
         types2.append(type4)
@@ -81,12 +75,7 @@ struct Model {
         types2.append(type7)
         types2.append(type8)
         types2.append(type9)
-        types2.append(type10)
-        types2.append(type11)
-        types2.append(type12)
-        types2.append(type13)
-        types2.append(type14)
-        types2.append(type15)
+     
         
         let subCat3 = Subcategory(title: "Accessories", productTypes: types2)
         let subCat4 = Subcategory(title: "Beauty", productTypes: types2)
@@ -98,6 +87,26 @@ struct Model {
         let cat2 = Category(title: "Women's Fashion", subcategories: subCat2s)
         
         categories.append(cat2)
+     
+        // Cat 3 Data
+        let type10 = ProductType(title: "Shirt")
+        let type11 = ProductType(title: "Pants")
+           
+           var types3 = [ProductType]()
+           types3.append(type10)
+           types3.append(type11)
+           
+           
+           let subCat5 = Subcategory(title: "Clothing", productTypes: types3)
+           let subCat6 = Subcategory(title: "Luggage", productTypes: types3)
+           
+           var subCat3s = [Subcategory]()
+           subCat3s.append(subCat5)
+           subCat3s.append(subCat6)
+           
+           let cat3 = Category(title: "Man's Fashion", subcategories: subCat3s)
+           
+           categories.append(cat3)
         
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CategoryViewController :  UIViewController {
     
     @IBOutlet weak var categoryTableView: UITableView!
     @IBOutlet weak var subcategoryTableView: UITableView!
@@ -22,9 +22,30 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         // Calling the first row
         categoryTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
         
-        
+        setNav()
     }
     
+    func setNav()  {
+        navigationItem.title = "Category"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cart"), landscapeImagePhone: .none, style: .plain, target: self, action: #selector(cartBtnTapped))
+    }
+    
+    @objc func cartBtnTapped() {
+        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
+        let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
+        
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    
+    
+    
+    
+}
+
+extension CategoryViewController  : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -80,6 +101,4 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         
         
     }
-    
-   
 }
