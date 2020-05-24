@@ -39,7 +39,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="170" id="FMe-MY-Opg"/>
                                                     </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="onv-b5-BF2">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="onv-b5-BF2">
                                                         <size key="itemSize" width="377" height="168"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -56,10 +56,6 @@
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTI-OG-LcV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="377" height="168"/>
                                                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="372" id="0uI-Kz-RNo"/>
-                                                                            <constraint firstAttribute="height" constant="167" id="Udc-ZF-Nnk"/>
-                                                                        </constraints>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <constraints>
@@ -72,8 +68,6 @@
                                                             <size key="customSize" width="377" height="168"/>
                                                             <connections>
                                                                 <outlet property="image" destination="gTI-OG-LcV" id="yWO-Ev-LA6"/>
-                                                                <outlet property="imageHeightConstraint" destination="Udc-ZF-Nnk" id="U9h-nR-22B"/>
-                                                                <outlet property="imageWIdthConstraint" destination="0uI-Kz-RNo" id="zHB-wt-Rdr"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>

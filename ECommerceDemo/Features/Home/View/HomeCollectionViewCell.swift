@@ -9,6 +9,11 @@
 import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
+    
+    // MARK:- variables
+    
+  
+    
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     
     @IBOutlet weak var sliderImageHeightConstraint: NSLayoutConstraint!
@@ -24,6 +29,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private var model : Model?
     
     var goToProductDetailsPage : ((Product) -> Void)?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +47,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
     }
     
+    
     func updateView(withModel modelData : Model) {
         model = modelData
         setNewArrivalCollectionViewHeight()
@@ -51,7 +58,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
         let count = model?.products.count ?? 0
         var row = 0.0
-       
+        
         if count % 2 == 0 {
             row = Double(count / 2 )
         }
@@ -64,10 +71,11 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK:- Collection View Data and delegate function
 
 extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-   
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -85,90 +93,142 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-     
-      
+        
+        
+        
         switch collectionView.tag {
-       
+            
         case 1:
             let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
-           
+            
             if let product = model?.products[indexPath.row] {
-                    cell.updateView(product:  product)
+                cell.updateView(product:  product)
             }
             
+           
+            
             return cell
-        
+            
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedProductCell", for: indexPath) as! FeaturedProductCell
-          
+            
             if let product = model?.products[indexPath.row] {
                 cell.updateView(product:  product)
             }
             
             
             return cell
-        
+            
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewArrivalCell", for: indexPath) as! NewArrivalCell
-        
+            
             cell.update(product:  model?.products[indexPath.row])
             
             return cell
-        
+            
         default:
             
             return UICollectionViewCell()
         }
-
+        
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-       
+        
         switch collectionView.tag {
-     
+            
         case 1 :
             
-           return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height)
-     
+            return updateSliderCollectionViewLayout()
+            
         case 2 :
             
-            return CGSize(width: 225, height: 145)
+            return updateFeaturedCollectionViewLayout()
             
         case 3:
             
-              // Change this column number to get your desired column
-                  let column = 2
-                  let width = collectionView.bounds.width
-                  let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-                  let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-                  let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
-                  // Round down the fraction number using floor method
-                  let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
-                  
-                  
-                  return CGSize(width: adjustedWidth, height: CGFloat(newArrivalCollectionViewCellHeight))
+            return updateNewArrivalCollectionViewLayout()
             
         default:
             return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height)
         }
-       
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
-        if let product = model?.products[indexPath.row] {
         
+        if let product = model?.products[indexPath.row] {
+            
             goToProductDetailsPage?(product)
         }
-       
+        
         
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-       
+        
         if collectionView.tag == 1 {
             pageController.currentPage = indexPath.item
         }
+    }
+    
+    
+}
+
+// MARK:- Functionality while view rotate
+
+extension HomeCollectionViewCell : ChangeViewWhileRotate {
+    
+    func rotate() {
+        
+        invalidCollectionViewLayout(collectionView: newArrivalCollectionView)
+        
+        invalidCollectionViewLayout(collectionView: sliderCollectionView)
+        
+        invalidCollectionViewLayout(collectionView: featuredProductCollectionView)
+        
+        
+    }
+    
+    func invalidCollectionViewLayout(collectionView : UICollectionView) {
+        let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        switch collectionView.tag {
+        case 1:
+            flowLayout.itemSize = updateSliderCollectionViewLayout()
+        case 2:
+            flowLayout.itemSize = updateFeaturedCollectionViewLayout()
+        case 3:
+            flowLayout.itemSize = updateNewArrivalCollectionViewLayout()
+        default:
+            flowLayout.itemSize = updateNewArrivalCollectionViewLayout()
+        }
+        
+        flowLayout.invalidateLayout()
+    }
+    
+    func updateNewArrivalCollectionViewLayout() -> CGSize {
+        
+        let column = 2
+        let width = newArrivalCollectionView.bounds.width
+        let flowLayout = newArrivalCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
+        // Round down the fraction number using floor method
+        let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
+        
+        return CGSize(width: adjustedWidth, height: CGFloat(self.newArrivalCollectionViewCellHeight))
+        
+    }
+    
+    func updateSliderCollectionViewLayout() -> CGSize {
+        
+        return CGSize(width: sliderCollectionView.bounds.width, height: 170)
+    }
+    
+    func updateFeaturedCollectionViewLayout() -> CGSize {
+        return CGSize(width: 225, height: 145)
     }
 }

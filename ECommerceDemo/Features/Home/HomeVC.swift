@@ -11,6 +11,7 @@ import UIKit
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
+    var willRoate : HomeCollectionViewCell?
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
@@ -61,6 +62,9 @@ UICollectionViewDelegateFlowLayout {
             //self?.present(productDetailsVC, animated: true, completion: nil)
         }
         
+        
+        willRoate = cell
+        
         return cell
     }
     
@@ -72,7 +76,16 @@ UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
-    
-    
+
+
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        
+        willRoate?.rotate()
+    }
+}
+
+protocol ChangeViewWhileRotate {
+    func rotate() 
 }
 

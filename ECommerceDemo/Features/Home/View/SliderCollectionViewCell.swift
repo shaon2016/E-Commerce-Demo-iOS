@@ -8,18 +8,21 @@
 
 import UIKit
 
-class SliderCollectionViewCell: UICollectionViewCell {
+class SliderCollectionViewCell: UICollectionViewCell{
+   
+    
     
     @IBOutlet weak var image: UIImageView!
     
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageWIdthConstraint: NSLayoutConstraint!
+    
     
    
      func updateView(product : Product) {
          image.image = product.image
-        
-        imageWIdthConstraint.constant = bounds.width
-        imageHeightConstraint.constant = bounds.height
+
      }
+    
+ 
+    
+    
 }

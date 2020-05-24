@@ -58,6 +58,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             
             cell.updateView(subcategory: model.categories[currentSelectedCategoryIndex].subcategories[indexPath.row])
             
+            // Dynamically size changed
             cell.layoutIfNeeded()
             
             return cell
