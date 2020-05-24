@@ -30,6 +30,8 @@
 		CEAD641924786AF400C5BF90 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD641824786AF400C5BF90 /* CategoryViewController.swift */; };
 		CECB83ED2476E08500E5F3FE /* ProductDetailsMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB83EC2476E08500E5F3FE /* ProductDetailsMainTableViewCell.swift */; };
 		CECB83EF2476E14C00E5F3FE /* RelatedProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB83EE2476E14C00E5F3FE /* RelatedProductsCell.swift */; };
+		CED085D72479F37E00A3D7C9 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED085D62479F37E00A3D7C9 /* DynamicHeightCollectionView.swift */; };
+		CED085D92479F52400A3D7C9 /* LeftModeCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED085D82479F52400A3D7C9 /* LeftModeCollectionViewFlowLayout.swift */; };
 		CEE0AD4D24788B5A0006B2EE /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0AD4C24788B5A0006B2EE /* CategoryTableViewCell.swift */; };
 		CEE0AD4F24788B760006B2EE /* SubCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0AD4E24788B760006B2EE /* SubCategoryTableViewCell.swift */; };
 		CEE0AD5124788BA30006B2EE /* ProductTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0AD5024788BA30006B2EE /* ProductTypeCollectionViewCell.swift */; };
@@ -71,6 +73,8 @@
 		CEAD641824786AF400C5BF90 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		CECB83EC2476E08500E5F3FE /* ProductDetailsMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsMainTableViewCell.swift; sourceTree = "<group>"; };
 		CECB83EE2476E14C00E5F3FE /* RelatedProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedProductsCell.swift; sourceTree = "<group>"; };
+		CED085D62479F37E00A3D7C9 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
+		CED085D82479F52400A3D7C9 /* LeftModeCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftModeCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		CEE0AD4C24788B5A0006B2EE /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		CEE0AD4E24788B760006B2EE /* SubCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		CEE0AD5024788BA30006B2EE /* ProductTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTypeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 		CEFF334924675009004D8260 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				CED085D82479F52400A3D7C9 /* LeftModeCollectionViewFlowLayout.swift */,
+				CED085D62479F37E00A3D7C9 /* DynamicHeightCollectionView.swift */,
 				CEFF334A24675009004D8260 /* Util.swift */,
 				CEFF334B24675009004D8260 /* LocationService.swift */,
 				CEA008112471A73100E4CB38 /* RatingView.swift */,
@@ -396,7 +402,9 @@
 			files = (
 				CEFF335024675009004D8260 /* MyUserDefault.swift in Sources */,
 				CECB83EF2476E14C00E5F3FE /* RelatedProductsCell.swift in Sources */,
+				CED085D92479F52400A3D7C9 /* LeftModeCollectionViewFlowLayout.swift in Sources */,
 				CE50B9642469D5F200DC7EC0 /* BaseVM.swift in Sources */,
+				CED085D72479F37E00A3D7C9 /* DynamicHeightCollectionView.swift in Sources */,
 				CEFF334024674F90004D8260 /* FormatTabController.swift in Sources */,
 				CEAD641924786AF400C5BF90 /* CategoryViewController.swift in Sources */,
 				CEE0AD4D24788B5A0006B2EE /* CategoryTableViewCell.swift in Sources */,

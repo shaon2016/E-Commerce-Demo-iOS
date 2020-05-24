@@ -12,8 +12,18 @@ class ProductTypeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var titleLabelWidthConstraint: NSLayoutConstraint!
     
     func updateView(type : ProductType) {
         titleLabel.text = type.title
+        
+//        var titleLabelRect = titleLabel.bounds
+//        
+//        titleLabelRect.size = (titleLabel.text?.size(withAttributes: [NSAttributedString.Key.font: UIFont(name: titleLabel.font.fontName , size: titleLabel.font.pointSize)!]))!
+//        titleLabelWidthConstraint.constant = titleLabelRect.width
+        
+        self.layer.cornerRadius = 3.0
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor
     }
 }

@@ -9,12 +9,13 @@
 import UIKit
 
 class SubCategoryTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var productTypeCollectionView: UICollectionView!
     
     @IBOutlet weak var productTypeCollectionViewHeightConstant: NSLayoutConstraint!
     private  var productTypeCollectionViewCellHeight  = 30
+    
     
     private var subCategory : Subcategory?
     
@@ -23,39 +24,30 @@ class SubCategoryTableViewCell: UITableViewCell {
         
         productTypeCollectionView.delegate = self
         productTypeCollectionView.dataSource = self
+        
+        
     }
-
+    
     func updateView(subcategory : Subcategory) {
-//        productTypeCollectionView.numberOfItems(inSection: subcategory.productTypes.count)
+        //        productTypeCollectionView.numberOfItems(inSection: subcategory.productTypes.count)
         
         self.subCategory = subcategory
         productTypeCollectionView.reloadData()
- 
+        
         titleLabel.text = subcategory.title
         
-        setproductTypeCollectionViewHeight()
+        //setproductTypeCollectionViewHeight()
+        
+//        productTypeCollectionViewHeightConstant.constant = 150
+        
+        
     }
-
-    func setproductTypeCollectionViewHeight() {
-        let flowLayout = productTypeCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-               let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
-               let count = subCategory?.productTypes.count ?? 0
-               var row = 0.0
-              
-               if count % 2 == 0 {
-                   row = Double(count / 2 )
-               }
-               else {
-                   row = Double(count / 2 ) + 1
-               }
-               let spaceBetweenLine = flowLayout.minimumLineSpacing * CGFloat(row - 1)
-               
-               productTypeCollectionViewHeightConstant.constant = CGFloat(Double(productTypeCollectionViewCellHeight) * row + Double(spaceBetweenLine + sectionInset) )
-    }
+    
+    
 }
 
 extension SubCategoryTableViewCell : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return subCategory?.productTypes.count ?? 0
     }
@@ -74,7 +66,18 @@ extension SubCategoryTableViewCell : UICollectionViewDelegateFlowLayout, UIColle
         
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: CGFloat(productTypeCollectionViewCellHeight))
+        
+        if let type = subCategory?.productTypes[indexPath.row] {
+            let text = type.title
+            let cellWidth = text.size(withAttributes:[.font: UIFont.systemFont(ofSize:13.0)]).width + 30.0
+            return CGSize(width: cellWidth, height: 30.0)
+        } else {
+            return CGSize(width: 0.0, height: 0.0)
+        }
+        
+        
     }
+    
 }
