@@ -79,6 +79,13 @@ extension CategoryViewController  : UITableViewDelegate, UITableViewDataSource{
             
             cell.updateView(subcategory: model.categories[currentSelectedCategoryIndex].subcategories[indexPath.row])
             
+            cell.productTypeTapped = { [weak self] in
+                let storyboard = UIStoryboard(name: "CategoryProduct", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CategoryProductVC") as! CategoryProductVC
+                
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
             // Dynamically size changed
             cell.layoutIfNeeded()
             

@@ -9,15 +9,16 @@
 import UIKit
 
 class SubCategoryTableViewCell: UITableViewCell {
-    
+    // MARK:- Variables
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var productTypeCollectionView: UICollectionView!
     
     @IBOutlet weak var productTypeCollectionViewHeightConstant: NSLayoutConstraint!
     private  var productTypeCollectionViewCellHeight  = 30
     
-    
     private var subCategory : Subcategory?
+    
+    var productTypeTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,8 +77,10 @@ extension SubCategoryTableViewCell : UICollectionViewDelegateFlowLayout, UIColle
         } else {
             return CGSize(width: 0.0, height: 0.0)
         }
-        
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        productTypeTapped?()
     }
     
 }
