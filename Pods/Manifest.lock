@@ -1,28 +1,36 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (5.2.0)
+  - DropDown (2.3.13)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - SideMenu (6.4.8)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
 
 DEPENDENCIES:
+  - DropDown
   - Moya (~> 14.0)
+  - SideMenu
   - SQLite.swift
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - DropDown
     - Moya
+    - SideMenu
     - SQLite.swift
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: 6b050c746604bd5e8a094f7366185b77caf1a6ff
+PODFILE CHECKSUM: 33b600a2dd4229acfa8f716498730fa2718e7718
 
 COCOAPODS: 1.8.4

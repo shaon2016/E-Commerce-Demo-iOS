@@ -6,6 +6,7 @@
 //  Copyright © 2020 LastBlade. All rights reserved.
 //
 
+import DropDown
 import UIKit
 
 @UIApplicationMain
@@ -15,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        DropDown.startListeningToKeyboard()
+        
         return true
     }
 

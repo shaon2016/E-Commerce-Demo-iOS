@@ -9,5 +9,7 @@ target 'ECommerceDemo' do
 
 	pod 'Moya', '~> 14.0'
 	pod 'SQLite.swift'
-
+  pod 'DropDown'
+  pod 'SideMenu'
+  
 end
