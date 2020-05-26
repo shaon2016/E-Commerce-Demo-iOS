@@ -9,6 +9,7 @@
 import UIKit
 
 class CategoryProductCell: UICollectionViewCell {
+   
     
     @IBOutlet weak var ivProduct: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -18,21 +19,11 @@ class CategoryProductCell: UICollectionViewCell {
     
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        //widthConstraint.constant = 5
-        
-        
-        calculateCellWidth()
-    }
+
     
-    
-    
-    func calculateCellWidth() {
-        let column = 2
+    func calculateCellWidth(column : Int) {
+            
+        
         let width = UIScreen.main.bounds.width
         
         let sectionInset = CGFloat( 8 + 8) // (left = 8 and right = 8)
@@ -42,6 +33,7 @@ class CategoryProductCell: UICollectionViewCell {
         let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
         
         widthConstraint.constant = adjustedWidth
+        
     }
     
     func updateView(product : Product) {
@@ -52,4 +44,7 @@ class CategoryProductCell: UICollectionViewCell {
         ratingView.setStarsRating(rating: product.rating)
     }
     
+    
 }
+
+
