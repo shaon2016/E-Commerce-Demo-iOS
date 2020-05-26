@@ -9,14 +9,14 @@
 import UIKit
 
 class ProductDetailsVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var product : Product?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setNav()
     }
     
@@ -25,25 +25,25 @@ class ProductDetailsVC: UIViewController , UITableViewDataSource, UITableViewDel
     }
     
     func setNav()  {
-           navigationItem.title = "Details"
-           let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-           navigationController?.navigationBar.titleTextAttributes = textAttributes
-           
-           navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cart"), landscapeImagePhone: .none, style: .plain, target: self, action: #selector(cartBtnTapped))
+        navigationItem.title = "Details"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cart"), landscapeImagePhone: .none, style: .plain, target: self, action: #selector(cartBtnTapped))
     }
-       
-       @objc func cartBtnTapped() {
-            let storyboard = UIStoryboard(name: "Cart", bundle: nil)
-            let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
-                      
-           navigationController?.pushViewController(cartVC, animated: true)
-       }
-
+    
+    @objc func cartBtnTapped() {
+        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
+        let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
+        
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailsMainTableViewCell", for: indexPath) as! ProductDetailsMainTableViewCell
         
@@ -54,5 +54,5 @@ class ProductDetailsVC: UIViewController , UITableViewDataSource, UITableViewDel
         
         return cell
     }
-
+    
 }

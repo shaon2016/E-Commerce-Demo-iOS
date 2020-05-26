@@ -16,7 +16,7 @@ enum ApiService {
 
 
 extension ApiService : TargetType {
-
+    
     
     var baseURL: URL {
         return URL(string: "https://api.aladhan.com/v1/")!

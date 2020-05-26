@@ -9,13 +9,13 @@
 import UIKit
 
 class RightSideFilterMenuViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
-
-  
-
+    
+    
+    
 }

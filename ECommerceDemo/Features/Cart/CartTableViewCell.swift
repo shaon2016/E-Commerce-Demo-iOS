@@ -27,7 +27,7 @@ class CartTableViewCell: UITableViewCell {
         priceLabel.text = "\(product.price) BDT"
         quantityLabel.text = "\(cart.quantity)"
     }
-
+    
     @IBAction func quantityIncrementBtnTapped(_ sender: UIButton) {
     }
     

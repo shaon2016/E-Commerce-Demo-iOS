@@ -12,7 +12,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     // MARK:- variables
     
-  
+    
     
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     
@@ -105,7 +105,7 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
                 cell.updateView(product:  product)
             }
             
-           
+            
             
             return cell
             
@@ -175,60 +175,27 @@ extension HomeCollectionViewCell : UICollectionViewDataSource, UICollectionViewD
     }
     
     
+       func updateNewArrivalCollectionViewLayout() -> CGSize {
+           
+           let column = 2
+           let width = newArrivalCollectionView.bounds.width
+           let flowLayout = newArrivalCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+           let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+           let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
+           // Round down the fraction number using floor method
+           let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
+           
+           return CGSize(width: adjustedWidth, height: CGFloat(self.newArrivalCollectionViewCellHeight))
+           
+       }
+       
+       func updateSliderCollectionViewLayout() -> CGSize {
+           
+           return CGSize(width: sliderCollectionView.bounds.width, height: 170)
+       }
+       
+       func updateFeaturedCollectionViewLayout() -> CGSize {
+           return CGSize(width: 225, height: 145)
+       }
 }
 
-// MARK:- Functionality while view rotate
-
-extension HomeCollectionViewCell : ChangeViewWhileRotate {
-    
-    func rotate() {
-        
-        invalidCollectionViewLayout(collectionView: newArrivalCollectionView)
-        
-        invalidCollectionViewLayout(collectionView: sliderCollectionView)
-        
-        invalidCollectionViewLayout(collectionView: featuredProductCollectionView)
-        
-        
-    }
-    
-    func invalidCollectionViewLayout(collectionView : UICollectionView) {
-        let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        
-        switch collectionView.tag {
-        case 1:
-            flowLayout.itemSize = updateSliderCollectionViewLayout()
-        case 2:
-            flowLayout.itemSize = updateFeaturedCollectionViewLayout()
-        case 3:
-            flowLayout.itemSize = updateNewArrivalCollectionViewLayout()
-        default:
-            flowLayout.itemSize = updateNewArrivalCollectionViewLayout()
-        }
-        
-        flowLayout.invalidateLayout()
-    }
-    
-    func updateNewArrivalCollectionViewLayout() -> CGSize {
-        
-        let column = 2
-        let width = newArrivalCollectionView.bounds.width
-        let flowLayout = newArrivalCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-        let spaceBetweenCell = flowLayout.minimumInteritemSpacing * CGFloat((column - 1))
-        // Round down the fraction number using floor method
-        let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
-        
-        return CGSize(width: adjustedWidth, height: CGFloat(self.newArrivalCollectionViewCellHeight))
-        
-    }
-    
-    func updateSliderCollectionViewLayout() -> CGSize {
-        
-        return CGSize(width: sliderCollectionView.bounds.width, height: 170)
-    }
-    
-    func updateFeaturedCollectionViewLayout() -> CGSize {
-        return CGSize(width: 225, height: 145)
-    }
-}

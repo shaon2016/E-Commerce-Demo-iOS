@@ -9,20 +9,20 @@
 import UIKit
 
 class SliderCollectionViewCell: UICollectionViewCell{
-   
+    
     
     
     @IBOutlet weak var image: UIImageView!
     
     
     
-   
-     func updateView(product : Product) {
-         image.image = product.image
-
-     }
     
- 
+    func updateView(product : Product) {
+        image.image = product.image
+        
+    }
+    
+    
     
     
 }

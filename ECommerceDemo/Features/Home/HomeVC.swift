@@ -11,8 +11,6 @@ import UIKit
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
-    var willRoate : HomeCollectionViewCell?
-    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     lazy var homeVM = HomeVM()
@@ -37,9 +35,9 @@ UICollectionViewDelegateFlowLayout {
     }
     
     @objc func cartBtnTapped() {
-         let storyboard = UIStoryboard(name: "Cart", bundle: nil)
-         let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
-                   
+        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
+        let cartVC = storyboard.instantiateViewController(identifier: "CartVC") as! CartVC
+        
         navigationController?.pushViewController(cartVC, animated: true)
     }
     
@@ -62,9 +60,6 @@ UICollectionViewDelegateFlowLayout {
             //self?.present(productDetailsVC, animated: true, completion: nil)
         }
         
-        
-        willRoate = cell
-        
         return cell
     }
     
@@ -76,13 +71,8 @@ UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
-
-
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        
-        willRoate?.rotate()
-    }
+    
+  
 }
 
 protocol ChangeViewWhileRotate {

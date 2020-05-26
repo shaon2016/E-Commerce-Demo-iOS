@@ -19,15 +19,19 @@ class FormatTabController {
         
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let categoryStoryboard = UIStoryboard(name: "Category", bundle: nil)
+        let accountStoryboard = UIStoryboard(name: "Account", bundle: nil)
         
         let homeVC = homeStoryboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
         let categoryVC = categoryStoryboard.instantiateViewController(withIdentifier: "CatVC") as! CategoryViewController
+        let accountVC = accountStoryboard.instantiateViewController(withIdentifier: "AccountVC") as! AccountVC
         
         
         let vcData : [(UIViewController, UIImage, UIImage)] = [
             (homeVC, UIImage(named: "home_tab_icon")!, UIImage(named: "home_selected_tab_icon")!),
           
             (categoryVC, UIImage(named: "category_tab_icon")!, UIImage(named: "category_selected_tab_icon")!),
+            
+            (accountVC, UIImage(named: "user_tab_icon")!, UIImage(named: "user_selected_tab_icon")!),
             
             
         ]

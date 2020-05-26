@@ -12,7 +12,7 @@ import CoreLocation
 struct MyUserDefault {
     static let instance = MyUserDefault()
     private let myDefault = UserDefaults.standard
-
+    
     private let LAT_KEY = "lat"
     private let LON_KEY = "lon"
     

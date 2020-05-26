@@ -9,18 +9,18 @@
 import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        
         
     }
-
+    
     func updateView(category : Category)  {
         titleLabel.text = category.title
     }
-
+    
 }

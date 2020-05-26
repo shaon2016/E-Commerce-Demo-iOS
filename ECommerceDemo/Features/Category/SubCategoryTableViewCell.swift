@@ -39,7 +39,7 @@ class SubCategoryTableViewCell: UITableViewCell {
         
         //setproductTypeCollectionViewHeight()
         
-//        productTypeCollectionViewHeightConstant.constant = 150
+        //        productTypeCollectionViewHeightConstant.constant = 150
         
         
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class CategoryProductCell: UICollectionViewCell {
-   
+    
     
     @IBOutlet weak var ivProduct: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,10 +19,10 @@ class CategoryProductCell: UICollectionViewCell {
     
     @IBOutlet weak var widthConstraint: NSLayoutConstraint!
     
-
+    
     
     func calculateCellWidth(column : Int) {
-            
+        
         
         let width = UIScreen.main.bounds.width
         

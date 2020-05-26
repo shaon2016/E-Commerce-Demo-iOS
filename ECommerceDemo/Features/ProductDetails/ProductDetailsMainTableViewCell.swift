@@ -9,7 +9,7 @@
 import UIKit
 
 class ProductDetailsMainTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,7 +20,7 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var relatedProductCollectionView: UICollectionView!
     
-     lazy var model = Model()
+    lazy var model = Model()
     
     private  var relatedProductCollectionViewCellHeight  = 216.0
     @IBOutlet weak var relatedProductCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -28,11 +28,11 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        
         relatedProductCollectionView.delegate = self
         relatedProductCollectionView.dataSource = self
     }
-
+    
     
     func updateView(product : Product) {
         productImage.image = productImage.image
@@ -44,21 +44,21 @@ class ProductDetailsMainTableViewCell: UITableViewCell {
         setRelatedProductCollectionViewHeight()
     }
     
-
-
-  
+    
+    
+    
 }
 
 
 extension ProductDetailsMainTableViewCell : UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout {
-   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RelatedProductsCell", for: indexPath) as!
         RelatedProductsCell
         
@@ -87,7 +87,7 @@ UICollectionViewDelegateFlowLayout {
         let sectionInset = flowLayout.sectionInset.top + flowLayout.sectionInset.bottom
         let count = model.products.count
         var row = 0.0
-       
+        
         if count % 2 == 0 {
             row = Double(count / 2 )
         }

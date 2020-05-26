@@ -75,21 +75,21 @@ class CategoryProductVC: UIViewController {
     
     
     @IBAction func gridBtnTapped(_ sender: Any) {
-              
-                  
-                   
+        
+        
+        
         if isToShowInGridView {
-                   
-                    isToShowInGridView = false
-
-                } else {
-                    isToShowInGridView = true
-             
-                }
-
-       
+            
+            isToShowInGridView = false
+            
+        } else {
+            isToShowInGridView = true
+            
+        }
+        
+        
         categoryProductCollectionView.reloadData()
-
+        
     }
     
 }
@@ -108,7 +108,7 @@ extension CategoryProductVC : UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.updateView(product: model.products[indexPath.row])
         
-       
+        
         
         return cell
     }
@@ -116,7 +116,7 @@ extension CategoryProductVC : UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let title = model.products[indexPath.row].title
-       
+        
         let imageHeight : CGFloat = 220.0
         let ratingViewHeight : CGFloat = 14.0
         let titleHeight = title.size(withAttributes:[.font: UIFont.systemFont(ofSize:16.0)]).height
@@ -132,12 +132,12 @@ extension CategoryProductVC : UICollectionViewDelegate, UICollectionViewDataSour
         
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
         let sectionInset = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-       
+        
         if !isToShowInGridView {
             let column = 2
             let spaceBetweenCell = 10 * CGFloat((column - 1))
             // Round down the fraction number using floor method
-    
+            
             let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
             
             return CGSize(width: adjustedWidth, height: totalHeight)
@@ -145,7 +145,7 @@ extension CategoryProductVC : UICollectionViewDelegate, UICollectionViewDataSour
             let column = 1
             let spaceBetweenCell = 10 * CGFloat((column - 1))
             // Round down the fraction number using floor method
-          
+            
             let adjustedWidth =  floor((width - spaceBetweenCell - sectionInset) / CGFloat(column))
             return CGSize(width: adjustedWidth, height: totalHeight)
         }
